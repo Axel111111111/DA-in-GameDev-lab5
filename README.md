@@ -1,113 +1,83 @@
 # DA-in-GameDev-lab5
 АНАЛИЗ ДАННЫХ И ИСКУССТВЕННЫЙ ИНТЕЛЛЕКТ [in GameDev]
+Отчет по лабораторной работе #5
+
 Интеграция экономической системы в проект Unity и обучение ML-Agent.
 
-Отчет по лабораторной работе #5 выполнил(а):
-
-Зубов Алексей Иванович
-РИ-210946 
+Выполнил:
+- Зубов Алексей Иванович
+- РИ-210946 
 Отметка о выполнении заданий (заполняется студентом):
-Задание	Выполнение	Баллы
-Задание 1	*	80
-Задание 2	*	20
+
+| Задание | Выполнение | Баллы |
+| ------ | ------ | ------ |
+| Задание 1 | * | 80 |
+| Задание 2 | * | 20 |
+
+
 знак "*" - задание выполнено; знак "#" - задание не выполнено;
 
 Работу проверили:
-
-к.т.н., доцент Денисов Д.В.
-к.э.н., доцент Панов М.А.
-ст. преп., Фадеев В.О.
-N|Solid
-
-Build Status
+- к.т.н., доцент Денисов Д.В.
+- к.э.н., доцент Панов М.А.
+- ст. преп., Фадеев В.О.
 
 Структура отчета
 
-Данные о работе: название работы, фио, группа, выполненные задания.
-Цель работы.
-Задание 1.
-Код реализации выполнения задания. Визуализация результатов выполнения (если применимо).
-Задание 2.
-Код реализации выполнения задания. Визуализация результатов выполнения (если применимо).
+- Данные о работе: название работы, фио, группа, выполненные задания.
+- Цель работы.
+- Задание 1.
+- Код реализации выполнения задания. Визуализация результатов выполнения (если применимо).
+- Задание 2.
+- Код реализации выполнения задания. Визуализация результатов выполнения (если применимо).
+- Выводы.
+- ✨Magic ✨
 
-✨Magic ✨
+
 Цель работы
 Научиться интегрировать экономическую систему в проект Unity и обучать ML-Agent.
 
-Задание 1
-Измените параметры файла. yaml-агента и определить какие параметры и как влияют на обучение модели.
+## Задание 1
+## Измените параметры файла. yaml-агента и определить какие параметры и как влияют на обучение модели.
+ 
 Открыл проект и подключил библиотеки мл агента. image
 
 Добавил Economic.yaml в папку с проектом. Содержимое файла Economic.yaml:
 
-behaviors:
-  Economic:
-    trainer_type: ppo
-    hyperparameters:
-      batch_size: 1024
-      buffer_size: 10240
-      learning_rate: 3.0e-4
-      learning_rate_schedule: linear
-      beta: 1.0e-2
-      epsilon: 0.2
-      lambd: 0.95
-      num_epoch: 3      
-    network_settings:
-      normalize: false
-      hidden_units: 128
-      num_layers: 2
-    reward_signals:
-      extrinsic:
-        gamma: 0.99
-        strength: 1.0
-    checkpoint_interval: 500000
-    max_steps: 750000
-    time_horizon: 64
-    summary_freq: 5000
-    self_play:
-      save_steps: 20000
-      team_change: 100000
-      swap_steps: 10000
-      play_against_latest_model_ratio: 0.5
-      window: 10
-Активировал виртуальное пространство и запустил обучение.
-image
+    behaviors:
+      Economic:
+        trainer_type: ppo
+        hyperparameters:
+          batch_size: 1024
+          buffer_size: 10240
+          learning_rate: 3.0e-4
+          learning_rate_schedule: linear
+          beta: 1.0e-2
+          epsilon: 0.2
+          lambd: 0.95
+          num_epoch: 3      
+        network_settings:
+          normalize: false
+          hidden_units: 128
+          num_layers: 2
+        reward_signals:
+          extrinsic:
+            gamma: 0.99
+            strength: 1.0
+        checkpoint_interval: 500000
+        max_steps: 750000
+        time_horizon: 64
+        summary_freq: 5000
+        self_play:
+          save_steps: 20000
+          team_change: 100000
+          swap_steps: 10000
+          play_against_latest_model_ratio: 0.5
+          window: 10
 
-По завершении обучения файлы сохранились.
-image
 
-Установил TensorBoard. Появились следующие графики:
-image
-
-Далее буду изменять 5 раз какие-либо параметры файла Economic.yaml. Задача - добиться максимальной монотонности и линейности графика Cumulative Reward.
-
-Изменил batch_size с 1024 на 2100. Прогнал все пункты заново.
-image
-
-График стал всегда равен 1.
-
-Изменил batch_size с 1024 на 300. Прогнал все пункты заново.
-image
-
-График стал более кривым.
-
-Вернул batch_size 1024, изменил lambd с 0.95 на 0.9
-image
-
-график стал более линеен.
-
-Оставил lambd 0.9 и изменил epsilon с 0.2 на 0.1
-image
-
-Практически нет изменений.
-
-Изменил num_epoch с 3 на 1
-image
-
-Практически нет изменений.
-
-Задание 2
-Опишите результаты, выведенные в TensorBoard.
+## Задание 2
+## Опишите результаты, выведенные в TensorBoard.
 Environment
 Cumulative Reward - среднее общее вознаграждение за эпизод для всех агентов. Увеличивается, когда эпизод обучения успешен. График должен постоянно увеличиваться, но может вести себя скачкообразно.
 
@@ -130,12 +100,4 @@ ELO - показывает силу сети.
 Выводы
 В этой лабораторной я научился интегрировать экономическую систему в проект Unity, используя мл агента. Научился выводить графики в TensorBoard и анализировать их.
 
-Plugin	README
-Dropbox	[plugins/dropbox/README.md][PlDb]
-GitHub	[plugins/github/README.md][PlGh]
-Google Drive	[plugins/googledrive/README.md][PlGd]
-OneDrive	[plugins/onedrive/README.md][PlOd]
-Medium	[plugins/medium/README.md][PlMe]
-Google Analytics	[plugins/googleanalytics/README.md][PlGa]
-Powered by
-BigDigital Team: Denisov | Fadeev | Panov
+**BigDigital Team: Denisov | Fadeev | Panov**
